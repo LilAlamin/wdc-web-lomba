@@ -271,7 +271,7 @@ const filterAlert = () => alert("Opening Filters...");
           <h2
             class="text-xl font-black uppercase tracking-wider border-b-2 border-black"
           >
-            Todo App
+            Buku Sakti Mahasiswa
           </h2>
         </div>
         <div class="hidden md:flex items-center gap-6">
@@ -287,9 +287,15 @@ const filterAlert = () => alert("Opening Filters...");
             >Dashboard</a
           >
           <a
-            class="text-sm font-bold uppercase tracking-widest hover:bg-neo-mint hover:text-black px-3 py-1 border-2 border-transparent hover:border-black hover:shadow-neo transition-all rounded"
-            href="#"
-            >Classes</a
+            @click.prevent="toggleView('notes')"
+            :class="[
+              'text-sm font-bold uppercase tracking-widest px-3 py-1 border-2 transition-all rounded cursor-pointer',
+              activeView === 'notes'
+                ? 'bg-neo-mint text-black border-black shadow-neo'
+                : 'border-transparent hover:border-black hover:shadow-neo hover:bg-neo-mint hover:text-black',
+            ]"
+            href="#notes"
+            >Notes</a
           >
           <a
             class="text-sm font-bold uppercase tracking-widest hover:bg-neo-orange hover:text-black px-3 py-1 border-2 border-transparent hover:border-black hover:shadow-neo transition-all rounded"
@@ -518,7 +524,6 @@ const filterAlert = () => alert("Opening Filters...");
           </div>
 
           <button
-            @click="toggleView('notes')"
             class="w-full mt-6 py-3 border-4 border-black bg-white dark:bg-slate-800 font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
           >
             View All Tasks
@@ -526,16 +531,33 @@ const filterAlert = () => alert("Opening Filters...");
         </div>
         <!-- Mini Calendar or Stats -->
         <div
-          class="bg-neo-pink border-4 border-black shadow-neo rounded-xl p-6 text-black transform hover:scale-[1.02] hover:rotate-1 transition-all cursor-pointer"
+          class="bg-gradient-to-br from-orange-400 via-red-500 to-yellow-400 border-4 border-black shadow-neo rounded-xl p-6 text-white transform hover:scale-[1.02] hover:rotate-1 transition-all cursor-pointer relative overflow-hidden"
         >
-          <h3 class="font-black uppercase text-xl mb-2">Study Streak</h3>
+          <!-- Glow effect -->
+          <div
+            class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-300 rounded-full opacity-30 blur-xl"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 w-16 h-16 bg-orange-300 rounded-full opacity-20 blur-lg"
+          ></div>
+
+          <h3
+            class="font-black uppercase text-xl mb-2 drop-shadow-[1px_1px_0px_rgba(0,0,0,0.5)]"
+          >
+            Study Streak
+          </h3>
           <div class="flex items-center gap-4">
-            <span class="material-symbols-outlined text-5xl font-black"
+            <span
+              class="material-symbols-outlined text-5xl font-black text-yellow-200 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)] animate-pulse"
               >local_fire_department</span
             >
             <div class="flex flex-col">
-              <span class="text-4xl font-black">12</span>
-              <span class="font-bold uppercase tracking-wider text-sm"
+              <span
+                class="text-4xl font-black drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]"
+                >12</span
+              >
+              <span
+                class="font-bold uppercase tracking-wider text-sm text-yellow-100"
                 >Days Strong</span
               >
             </div>
