@@ -3,6 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import NoteView from "./components/NoteView.vue";
 import ProfileView from "./components/ProfileView.vue";
 import AchievementsView from "./components/AchievementsView.vue";
+import AssignmentsView from "./components/AssignmentsView.vue";
 
 // --- View State Management ---
 const activeView = ref(
@@ -12,7 +13,9 @@ const activeView = ref(
       ? "achievements"
       : window.location.hash.includes("profile")
         ? "profile"
-        : "calendar",
+        : window.location.hash.includes("assignments")
+          ? "assignments"
+          : "calendar",
 );
 
 const toggleView = (view) => {
@@ -23,6 +26,8 @@ const toggleView = (view) => {
     window.location.hash = "profile";
   } else if (view === "achievements") {
     window.location.hash = "achievements";
+  } else if (view === "assignments") {
+    window.location.hash = "assignments";
   } else {
     window.location.hash = "";
   }
@@ -35,7 +40,9 @@ const handleHashChange = () => {
       ? "achievements"
       : window.location.hash.includes("profile")
         ? "profile"
-        : "calendar";
+        : window.location.hash.includes("assignments")
+          ? "assignments"
+          : "calendar";
 };
 
 onMounted(() => {
@@ -433,8 +440,14 @@ const filteredEvents = computed(() => {
             >Notes</a
           >
           <a
-            class="text-sm font-bold uppercase tracking-widest hover:bg-neo-orange hover:text-black px-3 py-1 border-2 border-transparent hover:border-black hover:shadow-neo transition-all rounded"
-            href="#"
+            @click.prevent="toggleView('assignments')"
+            :class="[
+              'text-sm font-bold uppercase tracking-widest px-3 py-1 border-2 transition-all rounded cursor-pointer',
+              activeView === 'assignments'
+                ? 'bg-neo-orange text-black border-black shadow-neo'
+                : 'border-transparent hover:border-black hover:shadow-neo hover:bg-neo-orange hover:text-black',
+            ]"
+            href="#assignments"
             >Assignments</a
           >
           <a
@@ -740,6 +753,7 @@ const filteredEvents = computed(() => {
           </div>
 
           <button
+            @click="toggleView('assignments')"
             class="w-full mt-6 py-3 border-4 border-black bg-white dark:bg-slate-800 font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
           >
             View All Tasks
@@ -747,7 +761,7 @@ const filteredEvents = computed(() => {
         </div>
         <!-- Mini Calendar or Stats -->
         <div
-          class="bg-gradient-to-br from-orange-400 via-red-500 to-yellow-400 border-4 border-black shadow-neo rounded-xl p-6 text-white transform hover:scale-[1.02] hover:rotate-1 transition-all cursor-pointer relative overflow-hidden"
+          class="bg-gradient-to-br from-orange-400 via-red-500 to-yellow-400 border-[5px] border-black rounded-[2rem] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 text-white transform hover:translate-y-[-2px] hover:translate-x-[-2px] transition-all cursor-pointer relative overflow-hidden"
         >
           <!-- Glow effect -->
           <div
@@ -764,16 +778,16 @@ const filteredEvents = computed(() => {
           </h3>
           <div class="flex items-center gap-4">
             <span
-              class="material-symbols-outlined text-5xl font-black text-yellow-200 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)] animate-pulse"
+              class="material-symbols-outlined text-6xl font-black text-yellow-200 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)] animate-pulse"
               >local_fire_department</span
             >
-            <div class="flex flex-col">
+            <div class="flex flex-col mt-2">
               <span
-                class="text-4xl font-black drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]"
+                class="text-6xl md:text-7xl font-black leading-none drop-shadow-[4px_4px_0px_rgba(0,0,0,0.3)]"
                 >12</span
               >
               <span
-                class="font-bold uppercase tracking-wider text-sm text-yellow-100"
+                class="font-bold uppercase tracking-wider text-sm text-yellow-100 mt-1"
                 >Days Strong</span
               >
             </div>
@@ -783,13 +797,16 @@ const filteredEvents = computed(() => {
     </main>
 
     <!-- Render Note View conditionally -->
-    <NoteView v-else-if="activeView === 'notes'" />
+    <NoteView v-if="activeView === 'notes'" />
 
     <!-- Render Profile View conditionally -->
-    <ProfileView v-else-if="activeView === 'profile'" @viewAchievements="toggleView('achievements')" />
+    <ProfileView v-if="activeView === 'profile'" @viewAchievements="toggleView('achievements')" />
 
     <!-- Render Achievements View conditionally -->
-    <AchievementsView v-else-if="activeView === 'achievements'" @back="toggleView('profile')" />
+    <AchievementsView v-if="activeView === 'achievements'" @back="toggleView('profile')" />
+
+    <!-- Render Assignments View conditionally -->
+    <AssignmentsView v-if="activeView === 'assignments'" @navigate="toggleView" />
 
     <!-- Event Detail Modal (Neobrutalism) -->
     <div
