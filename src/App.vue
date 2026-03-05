@@ -2,14 +2,17 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import NoteView from "./components/NoteView.vue";
 import ProfileView from "./components/ProfileView.vue";
+import AchievementsView from "./components/AchievementsView.vue";
 
 // --- View State Management ---
 const activeView = ref(
   window.location.hash.includes("notes")
     ? "notes"
-    : window.location.hash.includes("profile")
-      ? "profile"
-      : "calendar",
+    : window.location.hash.includes("achievements")
+      ? "achievements"
+      : window.location.hash.includes("profile")
+        ? "profile"
+        : "calendar",
 );
 
 const toggleView = (view) => {
@@ -18,6 +21,8 @@ const toggleView = (view) => {
     window.location.hash = "notes";
   } else if (view === "profile") {
     window.location.hash = "profile";
+  } else if (view === "achievements") {
+    window.location.hash = "achievements";
   } else {
     window.location.hash = "";
   }
@@ -26,9 +31,11 @@ const toggleView = (view) => {
 const handleHashChange = () => {
   activeView.value = window.location.hash.includes("notes")
     ? "notes"
-    : window.location.hash.includes("profile")
-      ? "profile"
-      : "calendar";
+    : window.location.hash.includes("achievements")
+      ? "achievements"
+      : window.location.hash.includes("profile")
+        ? "profile"
+        : "calendar";
 };
 
 onMounted(() => {
@@ -584,7 +591,10 @@ const filterAlert = () => alert("Opening Filters...");
     <NoteView v-else-if="activeView === 'notes'" />
 
     <!-- Render Profile View conditionally -->
-    <ProfileView v-else-if="activeView === 'profile'" />
+    <ProfileView v-else-if="activeView === 'profile'" @viewAchievements="toggleView('achievements')" />
+
+    <!-- Render Achievements View conditionally -->
+    <AchievementsView v-else-if="activeView === 'achievements'" @back="toggleView('profile')" />
 
     <!-- Event Detail Modal (Neobrutalism) -->
     <div

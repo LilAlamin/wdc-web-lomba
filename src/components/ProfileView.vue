@@ -100,7 +100,8 @@
         <div class="flex justify-between items-center mb-8 border-b-4 border-black pb-4">
           <h2 class="text-2xl font-black uppercase">Achievements</h2>
           <button
-            class="border-4 border-black px-4 py-2 font-bold uppercase transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-black hover:text-white"
+            @click="$emit('viewAchievements')"
+            class="border-4 border-black px-4 py-2 font-bold uppercase transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-black hover:text-white cursor-pointer"
           >
             View All
           </button>
@@ -392,6 +393,8 @@
 
 <script setup>
 import { ref } from 'vue';
+
+defineEmits(['viewAchievements']);
 
 const userName = ref("Andi Pratama");
 const userUniversity = ref("Computer Science @ Univ Indonesia");
