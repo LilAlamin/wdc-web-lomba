@@ -297,10 +297,14 @@ const calendarDays = computed(() => {
 
   // Current month
   const today = new Date();
+  const todayIndo = new Date(today.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+  const todayYear = todayIndo.getFullYear();
+  const todayMonth = todayIndo.getMonth();
+  const todayDate = todayIndo.getDate();
   for (let i = 1; i <= daysInMonth; i++) {
     const defaultDateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
     const dayEvents = filteredEvents.value.filter((e) => e.date === defaultDateStr);
-    const isToday = year === 2026 && month === 2 && i === 5; // hardcoded to March 5, 2026
+    const isToday = year === todayYear && month === todayMonth && i === todayDate;
 
     days.push({
       date: i,
