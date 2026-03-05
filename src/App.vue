@@ -4,6 +4,7 @@ import NoteView from "./components/NoteView.vue";
 import ProfileView from "./components/ProfileView.vue";
 import AchievementsView from "./components/AchievementsView.vue";
 import AssignmentsView from "./components/AssignmentsView.vue";
+import AiAssistantView from "./components/AiAssistantView.vue";
 
 // --- View State Management ---
 const activeView = ref(
@@ -15,7 +16,9 @@ const activeView = ref(
         ? "profile"
         : window.location.hash.includes("assignments")
           ? "assignments"
-          : "calendar",
+          : window.location.hash.includes("ai")
+            ? "ai"
+            : "calendar",
 );
 
 const toggleView = (view) => {
@@ -28,6 +31,8 @@ const toggleView = (view) => {
     window.location.hash = "achievements";
   } else if (view === "assignments") {
     window.location.hash = "assignments";
+  } else if (view === "ai") {
+    window.location.hash = "ai";
   } else {
     window.location.hash = "";
   }
@@ -42,7 +47,9 @@ const handleHashChange = () => {
         ? "profile"
         : window.location.hash.includes("assignments")
           ? "assignments"
-          : "calendar";
+          : window.location.hash.includes("ai")
+            ? "ai"
+            : "calendar";
 };
 
 onMounted(() => {
@@ -451,9 +458,15 @@ const filteredEvents = computed(() => {
             >Assignments</a
           >
           <a
-            class="text-sm font-bold uppercase tracking-widest hover:bg-neo-blue hover:text-black px-3 py-1 border-2 border-transparent hover:border-black hover:shadow-neo transition-all rounded"
-            href="#"
-            >Settings</a
+            @click.prevent="toggleView('ai')"
+            :class="[
+              'text-sm font-bold uppercase tracking-widest px-3 py-1 border-2 transition-all rounded cursor-pointer',
+              activeView === 'ai'
+                ? 'bg-neo-pink text-black border-black shadow-neo'
+                : 'text-neo-pink border-transparent hover:border-black hover:shadow-neo hover:bg-neo-pink hover:text-black',
+            ]"
+            href="#ai"
+            >Lumina AI</a
           >
         </div>
       </div>
@@ -807,6 +820,9 @@ const filteredEvents = computed(() => {
 
     <!-- Render Assignments View conditionally -->
     <AssignmentsView v-if="activeView === 'assignments'" @navigate="toggleView" />
+
+    <!-- Render AI Assistant View conditionally -->
+    <AiAssistantView v-else-if="activeView === 'ai'" />
 
     <!-- Event Detail Modal (Neobrutalism) -->
     <div
