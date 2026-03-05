@@ -1,21 +1,34 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import NoteView from "./components/NoteView.vue";
+import ProfileView from "./components/ProfileView.vue";
 
 // --- View State Management ---
 const activeView = ref(
-  window.location.hash.includes("notes") ? "notes" : "calendar",
+  window.location.hash.includes("notes")
+    ? "notes"
+    : window.location.hash.includes("profile")
+      ? "profile"
+      : "calendar",
 );
 
 const toggleView = (view) => {
   activeView.value = view;
-  window.location.hash = view === "notes" ? "notes" : "";
+  if (view === "notes") {
+    window.location.hash = "notes";
+  } else if (view === "profile") {
+    window.location.hash = "profile";
+  } else {
+    window.location.hash = "";
+  }
 };
 
 const handleHashChange = () => {
   activeView.value = window.location.hash.includes("notes")
     ? "notes"
-    : "calendar";
+    : window.location.hash.includes("profile")
+      ? "profile"
+      : "calendar";
 };
 
 onMounted(() => {
@@ -322,6 +335,7 @@ const filterAlert = () => alert("Opening Filters...");
           />
         </div>
         <div
+          @click="toggleView('profile')"
           class="bg-neo-mint border-4 border-black shadow-neo aspect-square bg-cover rounded-full size-12 flex items-center justify-center cursor-pointer hover:shadow-neo-hover hover:-translate-y-1 transition-all"
         >
           <span class="material-symbols-outlined font-bold text-black"
@@ -568,6 +582,9 @@ const filterAlert = () => alert("Opening Filters...");
 
     <!-- Render Note View conditionally -->
     <NoteView v-else-if="activeView === 'notes'" />
+
+    <!-- Render Profile View conditionally -->
+    <ProfileView v-else-if="activeView === 'profile'" />
 
     <!-- Event Detail Modal (Neobrutalism) -->
     <div
