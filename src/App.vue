@@ -47,7 +47,7 @@ onUnmounted(() => {
 });
 
 // --- Current Date Management ---
-const currentMonthIndex = ref(11); // 0-11 (December)
+const currentMonthIndex = ref(2); // 0-11 (March)
 const currentYear = ref(2026);
 
 const monthNames = [
@@ -88,7 +88,7 @@ const nextMonth = () => {
 // --- Dummy Events Data ---
 const events = ref([
   {
-    date: "2026-12-02",
+    date: "2026-03-02",
     title: "CS301 Lecture",
     color: "bg-neo-pink",
     time: "10:00 AM - 11:30 AM",
@@ -97,25 +97,25 @@ const events = ref([
       "Introduction to Graph Algorithms. Please bring your textbook and complete the pre-lecture reading on BFS/DFS.",
   },
   {
-    date: "2026-12-04",
+    date: "2026-03-04",
     title: "Study Group",
     color: "bg-neo-mint",
     time: "3:00 PM - 5:00 PM",
     location: "Library, Study Room 3B",
     description:
-      "Group study session for the upcoming CS301 final. Focus on dynamic programming and greedy algorithms.",
+      "Group study session for the upcoming CS301 midterm. Focus on dynamic programming and greedy algorithms.",
   },
   {
-    date: "2026-12-07",
+    date: "2026-03-07",
     title: "CS301 Lecture",
     color: "bg-neo-pink",
     time: "10:00 AM - 11:30 AM",
     location: "Room 204, Science Building",
     description:
-      "Final review lecture. Covering all major topics from the semester.",
+      "Midterm review lecture. Covering all major topics from the first half of the semester.",
   },
   {
-    date: "2026-12-07",
+    date: "2026-03-07",
     title: "Hist Essay Due",
     color: "bg-neo-orange",
     time: "11:59 PM",
@@ -124,7 +124,7 @@ const events = ref([
       "Submit your History 202 essay on the causes and consequences of the Cold War. Minimum 2000 words.",
   },
   {
-    date: "2026-12-08",
+    date: "2026-03-09",
     title: "Math Lab",
     color: "bg-neo-blue",
     time: "2:00 PM - 4:00 PM",
@@ -133,7 +133,7 @@ const events = ref([
       "Hands-on practice with linear algebra problems. Bring your calculator and problem set worksheet.",
   },
   {
-    date: "2026-12-09",
+    date: "2026-03-10",
     title: "Design Review",
     color: "bg-white",
     time: "1:00 PM - 2:30 PM",
@@ -142,38 +142,38 @@ const events = ref([
       "Present your mid-semester design project. Prepare a 10-minute presentation with mockups.",
   },
   {
-    date: "2026-12-15",
-    title: "CS301 Final",
+    date: "2026-03-16",
+    title: "CS301 Midterm",
     color: "bg-neo-pink",
     time: "9:00 AM - 12:00 PM",
     location: "Exam Hall A",
     description:
-      "Final examination covering all course material. Closed book, no electronic devices allowed.",
+      "Midterm examination covering chapters 1-8. Closed book, no electronic devices allowed.",
   },
   {
-    date: "2026-12-18",
-    title: "Winter Break Starts",
+    date: "2026-03-20",
+    title: "Spring Festival",
     color: "bg-neo-mint",
     time: "All Day",
     location: "Campus-wide",
     description:
-      "The winter break officially begins. Campus facilities will operate on reduced hours.",
+      "Annual spring festival with food stalls, music performances, and student club exhibitions.",
   },
   {
-    date: "2026-12-24",
-    title: "Holiday",
-    color: "bg-gray-200",
-    time: "All Day",
-    location: "",
-    description: "Christmas Eve. Campus closed.",
+    date: "2026-03-25",
+    title: "Project Deadline",
+    color: "bg-neo-orange",
+    time: "11:59 PM",
+    location: "Online Submission",
+    description: "Submit your group project for CS301. Include source code and documentation.",
   },
   {
-    date: "2026-12-25",
-    title: "Holiday",
-    color: "bg-gray-200",
-    time: "All Day",
-    location: "",
-    description: "Christmas Day. Campus closed.",
+    date: "2026-03-28",
+    title: "Workshop",
+    color: "bg-neo-blue",
+    time: "1:00 PM - 4:00 PM",
+    location: "Tech Lab, Room 305",
+    description: "Hands-on workshop on web development with modern frameworks.",
   },
 ]);
 
@@ -186,6 +186,78 @@ const openEventDetail = (event) => {
 
 const closeEventDetail = () => {
   selectedEvent.value = null;
+};
+
+// --- Create Event Modal ---
+const showCreateModal = ref(false);
+const newEvent = ref({
+  title: "",
+  date: "",
+  startTime: "",
+  endTime: "",
+  location: "",
+  description: "",
+  color: "bg-neo-pink",
+});
+
+const colorOptions = [
+  { value: "bg-neo-pink", label: "Lectures", hex: "#ff6bdf" },
+  { value: "bg-neo-mint", label: "Activities", hex: "#00ff9d" },
+  { value: "bg-neo-orange", label: "Deadlines", hex: "#ff8c00" },
+  { value: "bg-neo-blue", label: "Labs & Workshops", hex: "#00d0ff" },
+  { value: "bg-primary", label: "Personal", hex: "#f9f906" },
+  { value: "bg-white", label: "Other", hex: "#ffffff" },
+];
+
+const formatTime = (time24) => {
+  if (!time24) return "";
+  const [h, m] = time24.split(":");
+  const hour = parseInt(h);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${m} ${ampm}`;
+};
+
+const openCreateModal = () => {
+  newEvent.value = {
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    location: "",
+    description: "",
+    color: "bg-neo-pink",
+  };
+  showCreateModal.value = true;
+};
+
+const closeCreateModal = () => {
+  showCreateModal.value = false;
+};
+
+const createEvent = () => {
+  if (!newEvent.value.title || !newEvent.value.date) {
+    return;
+  }
+  // Build display time string
+  let timeStr = "";
+  if (newEvent.value.startTime && newEvent.value.endTime) {
+    timeStr = `${formatTime(newEvent.value.startTime)} - ${formatTime(newEvent.value.endTime)}`;
+  } else if (newEvent.value.startTime) {
+    timeStr = formatTime(newEvent.value.startTime);
+  }
+
+  const eventData = {
+    title: newEvent.value.title,
+    date: newEvent.value.date,
+    time: timeStr,
+    location: newEvent.value.location,
+    description: newEvent.value.description,
+    color: newEvent.value.color,
+  };
+  events.value.push(eventData);
+
+  closeCreateModal();
 };
 
 // --- Generate Calendar Grid ---
@@ -213,15 +285,15 @@ const calendarDays = computed(() => {
   const today = new Date();
   for (let i = 1; i <= daysInMonth; i++) {
     const defaultDateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
-    const dayEvents = events.value.filter((e) => e.date === defaultDateStr);
-    const isToday = year === 2026 && month === 11 && i === 9; // hardcoded to match the original mockup design's 'today'
+    const dayEvents = filteredEvents.value.filter((e) => e.date === defaultDateStr);
+    const isToday = year === 2026 && month === 2 && i === 5; // hardcoded to March 5, 2026
 
     days.push({
       date: i,
       month: "current",
       isToday: isToday,
       events: dayEvents,
-      isSpecial: month === 11 && (i === 24 || i === 25), // Making 24 & 25 special to match mockup
+      isSpecial: month === 2 && (i === 20 || i === 28), // Making Spring Festival & Workshop special
     });
   }
 
@@ -244,30 +316,73 @@ const calendarDays = computed(() => {
 const deadlines = ref([
   {
     id: 1,
-    title: "CS301 Final Project",
-    time: "Dec 15, 11:59 PM",
+    title: "CS301 Midterm Prep",
+    time: "Mar 16, 9:00 AM",
     done: false,
     hoverColor: "hover:bg-primary/20",
   },
   {
     id: 2,
     title: "History 202 Essay",
-    time: "Dec 7, 5:00 PM",
+    time: "Mar 7, 11:59 PM",
     done: false,
     hoverColor: "hover:bg-neo-mint/20",
   },
   {
     id: 3,
-    title: "Math 415 P-Set 8",
-    time: "Dec 8, 8:00 AM",
+    title: "CS301 Group Project",
+    time: "Mar 25, 11:59 PM",
     done: false,
     hoverColor: "hover:bg-neo-blue/20",
   },
 ]);
 
 // Actions
-const createEventAlert = () => alert("Opening New Event Modal...");
-const filterAlert = () => alert("Opening Filters...");
+// --- Filter Feature ---
+const showFilterPanel = ref(false);
+const activeFilters = ref([
+  "bg-neo-pink",
+  "bg-neo-mint",
+  "bg-neo-orange",
+  "bg-neo-blue",
+  "bg-primary",
+  "bg-white",
+  "bg-gray-200",
+]);
+const searchQuery = ref("");
+
+const toggleFilter = (color) => {
+  const idx = activeFilters.value.indexOf(color);
+  if (idx > -1) {
+    activeFilters.value.splice(idx, 1);
+  } else {
+    activeFilters.value.push(color);
+  }
+};
+
+const resetFilters = () => {
+  activeFilters.value = [
+    "bg-neo-pink",
+    "bg-neo-mint",
+    "bg-neo-orange",
+    "bg-neo-blue",
+    "bg-primary",
+    "bg-white",
+    "bg-gray-200",
+  ];
+  searchQuery.value = "";
+};
+
+const filteredEvents = computed(() => {
+  return events.value.filter((e) => {
+    const matchesColor = activeFilters.value.includes(e.color);
+    const matchesSearch =
+      !searchQuery.value ||
+      e.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      (e.description && e.description.toLowerCase().includes(searchQuery.value.toLowerCase()));
+    return matchesColor && matchesSearch;
+  });
+});
 </script>
 
 <template>
@@ -385,17 +500,97 @@ const filterAlert = () => alert("Opening Filters...");
             </button>
           </div>
           <div class="flex gap-4">
-            <button
-              @click="filterAlert"
-              class="flex items-center justify-center gap-2 border-4 border-black rounded bg-white dark:bg-slate-800 px-6 py-3 font-bold uppercase shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all"
-            >
-              <span class="material-symbols-outlined font-bold"
-                >filter_list</span
+            <div class="relative">
+              <button
+                @click="showFilterPanel = !showFilterPanel"
+                :class="[
+                  'flex items-center justify-center gap-2 border-4 border-black rounded px-6 py-3 font-bold uppercase shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all',
+                  activeFilters.length < 7 || searchQuery
+                    ? 'bg-neo-orange text-black'
+                    : 'bg-white dark:bg-slate-800',
+                ]"
               >
-              Filter
-            </button>
+                <span class="material-symbols-outlined font-bold"
+                  >filter_list</span
+                >
+                Filter
+                <span
+                  v-if="activeFilters.length < 7 || searchQuery"
+                  class="bg-black text-white text-xs font-black rounded-full w-5 h-5 flex items-center justify-center"
+                >!</span>
+              </button>
+
+              <!-- Filter Dropdown -->
+              <div
+                v-if="showFilterPanel"
+                class="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-slate-900 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-50 flex flex-col"
+              >
+                <!-- Filter Header -->
+                <div class="flex items-center justify-between border-b-4 border-black p-4 bg-neo-orange">
+                  <h4 class="font-black uppercase text-sm text-black">Filter Events</h4>
+                  <button
+                    @click="showFilterPanel = false"
+                    class="w-6 h-6 flex items-center justify-center bg-white border-2 border-black hover:shadow-neo transition-all"
+                  >
+                    <span class="material-symbols-outlined font-black text-black text-sm">close</span>
+                  </button>
+                </div>
+
+                <!-- Search -->
+                <div class="p-3 border-b-2 border-black">
+                  <div class="relative">
+                    <span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">search</span>
+                    <input
+                      v-model="searchQuery"
+                      type="text"
+                      placeholder="Search events..."
+                      class="w-full border-2 border-black rounded py-2 pl-8 pr-3 text-sm font-bold bg-white dark:bg-slate-800 focus:outline-none focus:shadow-neo transition-all placeholder:text-gray-400"
+                    />
+                  </div>
+                </div>
+
+                <!-- Color Filters -->
+                <div class="p-3 flex flex-col gap-2">
+                  <span class="font-black uppercase text-xs text-gray-500">By Category</span>
+                  <label
+                    v-for="color in [
+                      { value: 'bg-neo-pink', label: 'Lectures', hex: '#ff6bdf' },
+                      { value: 'bg-neo-mint', label: 'Activities', hex: '#00ff9d' },
+                      { value: 'bg-neo-orange', label: 'Deadlines', hex: '#ff8c00' },
+                      { value: 'bg-neo-blue', label: 'Labs & Workshops', hex: '#00d0ff' },
+                      { value: 'bg-primary', label: 'Personal', hex: '#f9f906' },
+                      { value: 'bg-white', label: 'Other', hex: '#ffffff' },
+                    ]"
+                    :key="color.value"
+                    class="flex items-center gap-3 p-2 border-2 border-transparent hover:border-black rounded cursor-pointer transition-all group"
+                  >
+                    <input
+                      type="checkbox"
+                      :checked="activeFilters.includes(color.value)"
+                      @change="toggleFilter(color.value)"
+                      class="size-5 border-2 border-black rounded-sm text-black focus:ring-black focus:ring-offset-0 checked:bg-black transition-colors"
+                    />
+                    <div
+                      class="w-4 h-4 border-2 border-black flex-shrink-0"
+                      :style="{ backgroundColor: color.hex }"
+                    ></div>
+                    <span class="font-bold text-sm group-hover:underline">{{ color.label }}</span>
+                  </label>
+                </div>
+
+                <!-- Filter Footer -->
+                <div class="p-3 border-t-2 border-black flex justify-end">
+                  <button
+                    @click="resetFilters"
+                    class="px-4 py-1 border-2 border-black bg-white font-bold text-xs uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[2px] hover:translate-x-[2px] transition-all"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
             <button
-              @click="createEventAlert"
+              @click="openCreateModal"
               class="flex items-center justify-center gap-2 border-4 border-black rounded bg-primary text-black px-6 py-3 font-bold uppercase shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all"
             >
               <span class="material-symbols-outlined font-bold">add</span>
@@ -696,6 +891,134 @@ const filterAlert = () => alert("Opening Filters...");
             class="px-6 py-2 border-4 border-black bg-white dark:bg-slate-700 font-bold uppercase transition-all hover:-translate-y-[2px] hover:-translate-x-[2px] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
           >
             Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Event Modal (Neobrutalism - Compact) -->
+    <div
+      v-if="showCreateModal"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      @click.self="closeCreateModal"
+    >
+      <div
+        class="w-full max-w-md bg-white dark:bg-slate-900 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh] overflow-y-auto"
+      >
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-4 bg-primary border-b-4 border-black">
+          <h3 class="font-black uppercase text-2xl text-black tracking-tight">
+            New Event
+          </h3>
+          <button
+            @click="closeCreateModal"
+            class="w-8 h-8 flex items-center justify-center bg-red-500 border-2 border-black hover:shadow-neo transition-all"
+          >
+            <span class="material-symbols-outlined font-black text-white text-sm">close</span>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="px-4 pb-2 mt-4 flex flex-col gap-4">
+          <!-- Title -->
+          <div class="flex flex-col gap-1">
+            <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Event Title *</label>
+            <input
+              v-model="newEvent.title"
+              type="text"
+              placeholder="e.g. Crush Physics Assignment..."
+              class="w-full border-2 border-black rounded py-2 px-3 font-bold text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all placeholder:text-gray-400"
+            />
+          </div>
+
+          <!-- Category & Deadline Row -->
+          <div class="flex gap-4">
+            <!-- Category (Color Picker as pills) -->
+            <div class="flex flex-col gap-1 flex-1">
+              <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Category</label>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  v-for="color in colorOptions"
+                  :key="color.value"
+                  @click="newEvent.color = color.value"
+                  :class="[
+                    'flex items-center gap-1 px-3 py-1 border-2 text-xs font-black uppercase transition-all',
+                    newEvent.color === color.value
+                      ? 'border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] scale-105'
+                      : 'border-gray-300 hover:border-black opacity-70 hover:opacity-100',
+                  ]"
+                  :style="{ backgroundColor: color.hex }"
+                >
+                  <span
+                    v-if="newEvent.color === color.value"
+                    class="material-symbols-outlined text-black"
+                    style="font-size: 14px"
+                  >check</span>
+                  <span class="text-black">{{ color.label }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deadline Row: Date + Time -->
+          <div class="flex flex-col gap-1">
+            <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Deadline</label>
+            <div class="flex gap-2">
+              <input
+                v-model="newEvent.date"
+                type="date"
+                class="flex-1 border-2 border-black rounded py-2 px-3 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
+              />
+              <input
+                v-model="newEvent.startTime"
+                type="time"
+                class="w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
+              />
+              <input
+                v-model="newEvent.endTime"
+                type="time"
+                class="w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="flex flex-col gap-1">
+            <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Location</label>
+            <input
+              v-model="newEvent.location"
+              type="text"
+              placeholder="e.g. Room 204, Science Building"
+              class="w-full border-2 border-black rounded py-2 px-3 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all placeholder:text-gray-400"
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="flex flex-col gap-1">
+            <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Description</label>
+            <textarea
+              v-model="newEvent.description"
+              rows="2"
+              placeholder="Add event details..."
+              class="w-full border-2 border-black rounded py-2 px-3 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all resize-none placeholder:text-gray-400"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Save Button (Full Width) -->
+        <div class="p-4">
+          <button
+            @click="createEvent"
+            :disabled="!newEvent.title || !newEvent.date"
+            :class="[
+              'w-full py-3 border-4 border-black font-black uppercase text-lg tracking-wide transition-all flex items-center justify-center gap-2',
+              newEvent.title && newEvent.date
+                ? 'bg-neo-mint text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px]'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed',
+            ]"
+          >
+            Save Event
+            <span class="material-symbols-outlined font-black">arrow_forward</span>
           </button>
         </div>
       </div>
