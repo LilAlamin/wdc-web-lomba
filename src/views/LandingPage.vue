@@ -36,35 +36,75 @@ const features = [
     icon: "calendar_today",
     title: "Smart Calendar",
     desc: "Kelola jadwal kuliah, deadline, dan kegiatan kampus dalam satu kalender interaktif yang powerful.",
+    details: [
+      "Tampilan kalender bulanan yang interaktif",
+      "Buat event baru langsung dari kalender",
+      "Filter event berdasarkan kategori warna",
+      "Lihat detail event dengan sekali klik",
+      "Tracking study streak harian otomatis",
+    ],
     color: "bg-neo-pink",
+    colorHex: "#ff6bdf",
     borderColor: "border-neo-pink",
   },
   {
     icon: "sticky_note_2",
     title: "Catatan Pintar",
     desc: "Buat, edit, dan organisir catatan kuliah dengan rich text editor. Tidak ada lagi catatan yang hilang!",
+    details: [
+      "Rich text editor dengan formatting lengkap",
+      "Organisir catatan per mata kuliah",
+      "Search & filter catatan secara cepat",
+      "Auto-save sehingga tidak ada yang hilang",
+      "Pin catatan penting ke atas",
+    ],
     color: "bg-neo-mint",
+    colorHex: "#00ff9d",
     borderColor: "border-neo-mint",
   },
   {
     icon: "assignment",
     title: "Tugas & Deadline",
     desc: "Track semua tugas dan deadline dalam satu tempat. Checklist, prioritas, dan reminder otomatis.",
+    details: [
+      "Checklist tugas dengan progress tracker",
+      "Prioritas tugas: High, Medium, Low",
+      "Deadline reminder sebelum jatuh tempo",
+      "Tandai tugas selesai dengan satu klik",
+      "Integrasi otomatis ke kalender",
+    ],
     color: "bg-neo-orange",
+    colorHex: "#ff8c00",
     borderColor: "border-neo-orange",
   },
   {
     icon: "psychology",
     title: "Lumina AI",
     desc: "Asisten AI pribadi yang bantu kamu belajar, merangkum materi, dan menjawab pertanyaan akademik.",
+    details: [
+      "Tanya jawab akademik real-time",
+      "Rangkuman materi kuliah otomatis",
+      "Bantu buat outline tugas & essay",
+      "Jelaskan konsep sulit dengan mudah",
+      "Support Bahasa Indonesia & Inggris",
+    ],
     color: "bg-neo-blue",
+    colorHex: "#00d0ff",
     borderColor: "border-neo-blue",
   },
   {
     icon: "emoji_events",
     title: "Achievements & Profil",
     desc: "Gamifikasi perjalanan akademikmu. Raih achievement, bangun streak, dan pantau progress belajar.",
+    details: [
+      "Sistem achievement & badge koleksi",
+      "Study streak counter harian",
+      "Profil mahasiswa yang bisa dikustomisasi",
+      "Statistik belajar & progres mingguan",
+      "Leaderboard antar mahasiswa",
+    ],
     color: "bg-primary",
+    colorHex: "#f9f906",
     borderColor: "border-primary",
   },
 ];
@@ -377,42 +417,88 @@ for (let i = 0; i < 12; i++) {
             :key="idx"
             :id="'feature-' + idx"
             data-animate
+            class="perspective-1000"
             :class="[
-              'group p-8 border-4 border-black shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all cursor-pointer bg-white',
               isVisible['feature-' + idx]
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0',
             ]"
             :style="{
               transition: 'all 0.5s ease ' + idx * 0.1 + 's',
+              perspective: '1000px',
             }"
           >
-            <!-- Icon -->
-            <div
-              :class="[
-                'w-16 h-16 flex items-center justify-center border-4 border-black shadow-neo mb-6',
-                feature.color,
-              ]"
-            >
-              <span class="material-symbols-outlined text-3xl font-black text-black">{{
-                feature.icon
-              }}</span>
-            </div>
+            <div class="flip-card group relative w-full" style="min-height: 320px;">
+              <!-- FRONT FACE -->
+              <div
+                class="flip-card-front absolute inset-0 p-8 border-4 border-black shadow-neo bg-white flex flex-col backface-hidden transition-transform duration-500 group-hover:[transform:rotateY(180deg)]"
+              >
+                <!-- Icon -->
+                <div
+                  :class="[
+                    'w-16 h-16 flex items-center justify-center border-4 border-black shadow-neo mb-6',
+                    feature.color,
+                  ]"
+                >
+                  <span class="material-symbols-outlined text-3xl font-black text-black">{{
+                    feature.icon
+                  }}</span>
+                </div>
 
-            <!-- Content -->
-            <h3
-              class="text-2xl font-black uppercase mb-3 group-hover:text-neo-pink transition-colors"
-            >
-              {{ feature.title }}
-            </h3>
-            <p class="font-bold text-gray-600 leading-relaxed">
-              {{ feature.desc }}
-            </p>
+                <!-- Content -->
+                <h3
+                  class="text-2xl font-black uppercase mb-3"
+                >
+                  {{ feature.title }}
+                </h3>
+                <p class="font-bold text-gray-600 leading-relaxed flex-1">
+                  {{ feature.desc }}
+                </p>
 
-            <!-- Arrow -->
-            <div class="mt-6 flex items-center gap-2 text-sm font-black uppercase text-gray-400 group-hover:text-black transition-colors">
-              <span>Selengkapnya</span>
-              <span class="material-symbols-outlined text-lg font-bold group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                <!-- Arrow -->
+                <div class="mt-4 flex items-center gap-2 text-sm font-black uppercase text-gray-400 group-hover:text-black transition-colors">
+                  <span>Hover untuk detail</span>
+                  <span class="material-symbols-outlined text-lg font-bold animate-pulse">touch_app</span>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div
+                :class="[
+                  'flip-card-back absolute inset-0 p-8 border-4 border-black shadow-neo flex flex-col backface-hidden [transform:rotateY(180deg)] transition-transform duration-500 group-hover:[transform:rotateY(0deg)]',
+                  feature.color,
+                ]"
+              >
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-12 h-12 flex items-center justify-center border-4 border-black bg-white shadow-neo">
+                    <span class="material-symbols-outlined text-2xl font-black text-black">{{
+                      feature.icon
+                    }}</span>
+                  </div>
+                  <h3 class="text-xl font-black uppercase text-black">
+                    {{ feature.title }}
+                  </h3>
+                </div>
+
+                <!-- Detail list -->
+                <div class="flex flex-col gap-2.5 flex-1">
+                  <div
+                    v-for="(detail, dIdx) in feature.details"
+                    :key="dIdx"
+                    class="flex items-start gap-2"
+                  >
+                    <span class="material-symbols-outlined text-black font-bold text-lg flex-shrink-0 mt-0.5">check_circle</span>
+                    <span class="font-bold text-black text-sm leading-snug">{{ detail }}</span>
+                  </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="mt-4 pt-3 border-t-2 border-black flex items-center gap-2 text-sm font-black uppercase text-black">
+                  <span class="material-symbols-outlined text-lg font-bold">arrow_back</span>
+                  <span>Hover untuk kembali</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -823,5 +909,21 @@ for (let i = 0; i < 12; i++) {
   100% {
     transform: translateY(-30px) rotate(10deg);
   }
+}
+
+.flip-card {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front,
+.flip-card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 </style>
