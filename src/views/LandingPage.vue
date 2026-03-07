@@ -354,30 +354,58 @@ for (let i = 0; i < 12; i++) {
         </div>
 
         <!-- Right: Illustration -->
-        <div class="flex-1 flex items-center justify-center relative">
+        <div class="hero-illustration flex-1 flex items-center justify-center relative group/hero">
           <!-- Background decorative card behind illustration -->
-          <div class="absolute w-[90%] h-[90%] bg-neo-pink border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-3xl rotate-3 top-4 left-4"></div>
-          <div class="absolute w-[85%] h-[85%] bg-neo-mint border-4 border-black shadow-neo rounded-3xl -rotate-2 top-8 right-4"></div>
+          <div class="absolute w-[90%] h-[90%] bg-neo-pink border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-3xl rotate-3 top-4 left-4 transition-transform duration-500 group-hover/hero:rotate-6"></div>
+          <div class="absolute w-[85%] h-[85%] bg-neo-mint border-4 border-black shadow-neo rounded-3xl -rotate-2 top-8 right-4 transition-transform duration-500 group-hover/hero:-rotate-4"></div>
 
-          <!-- Main illustration -->
-          <div class="relative z-10 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-3xl p-4 transform hover:-rotate-1 hover:scale-[1.02] transition-all duration-300">
+          <!-- Main illustration card -->
+          <div class="illustration-card relative z-10 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-3xl p-4 transition-all duration-300 group-hover/hero:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+            <!-- Default image (eyes normal) -->
             <img
               src="/images/student-laptop.png"
               alt="Mahasiswa sedang belajar"
-              class="w-full max-w-md h-auto object-contain"
+              class="w-full max-w-md h-auto object-contain transition-opacity duration-300 group-hover/hero:opacity-0"
             />
+            <!-- Hover image (eyes wide open) -->
+            <img
+              src="/images/student-laptop-awake.png"
+              alt="Mahasiswa terkejut"
+              class="w-full max-w-md h-auto object-contain absolute inset-4 opacity-0 transition-opacity duration-300 group-hover/hero:opacity-100"
+            />
+
+            <!-- Speech Bubble (appears on hover) -->
+            <div class="speech-bubble absolute -top-16 left-4 bg-white border-4 border-black shadow-neo px-4 py-2 font-black text-sm text-black opacity-0 scale-0 transition-all duration-300 group-hover/hero:opacity-100 group-hover/hero:scale-100 z-30" style="transition-delay: 0.2s;">
+              Hai! Ayo belajar! 📚
+              <!-- Speech bubble tail -->
+              <div class="absolute -bottom-3 right-6 w-5 h-5 bg-white border-b-4 border-r-4 border-black transform rotate-45"></div>
+            </div>
+
+            <!-- Sparkle particles (appear on hover) -->
+            <div class="absolute -top-3 -left-3 opacity-0 group-hover/hero:opacity-100 transition-all duration-300 z-20" style="transition-delay: 0.1s;">
+              <span class="material-symbols-outlined text-primary font-bold text-2xl sparkle-anim">star</span>
+            </div>
+            <div class="absolute top-1/4 -right-4 opacity-0 group-hover/hero:opacity-100 transition-all duration-300 z-20" style="transition-delay: 0.3s;">
+              <span class="material-symbols-outlined text-neo-pink font-bold text-xl sparkle-anim" style="animation-delay: 0.2s;">auto_awesome</span>
+            </div>
+            <div class="absolute -bottom-2 right-1/4 opacity-0 group-hover/hero:opacity-100 transition-all duration-300 z-20" style="transition-delay: 0.5s;">
+              <span class="material-symbols-outlined text-neo-mint font-bold text-lg sparkle-anim" style="animation-delay: 0.4s;">star</span>
+            </div>
+            <div class="absolute top-2/3 -left-5 opacity-0 group-hover/hero:opacity-100 transition-all duration-300 z-20" style="transition-delay: 0.4s;">
+              <span class="material-symbols-outlined text-neo-blue font-bold text-xl sparkle-anim" style="animation-delay: 0.3s;">favorite</span>
+            </div>
           </div>
 
-          <!-- Floating mini badges -->
-          <div class="absolute -top-4 -right-2 bg-primary border-4 border-black shadow-neo px-3 py-2 font-black text-sm rotate-6 z-20 hidden md:flex items-center gap-1 animate-bounce" style="animation-delay: 0.5s;">
+          <!-- Floating mini badges (enhanced with hover animations) -->
+          <div class="absolute -top-4 -right-2 bg-primary border-4 border-black shadow-neo px-3 py-2 font-black text-sm rotate-6 z-20 hidden md:flex items-center gap-1 animate-bounce transition-all duration-300 group-hover/hero:scale-110 group-hover/hero:-top-8 group-hover/hero:rotate-12" style="animation-delay: 0.5s;">
             <span class="material-symbols-outlined text-lg font-bold">local_fire_department</span>
             Streak 12!
           </div>
-          <div class="absolute -bottom-2 -left-2 bg-neo-blue border-4 border-black shadow-neo px-3 py-2 font-black text-sm -rotate-3 z-20 hidden md:flex items-center gap-1">
+          <div class="absolute -bottom-2 -left-2 bg-neo-blue border-4 border-black shadow-neo px-3 py-2 font-black text-sm -rotate-3 z-20 hidden md:flex items-center gap-1 transition-all duration-300 group-hover/hero:scale-110 group-hover/hero:-bottom-6 group-hover/hero:-rotate-6">
             <span class="material-symbols-outlined text-lg font-bold">emoji_events</span>
             A+ Grade
           </div>
-          <div class="absolute top-1/2 -right-6 bg-neo-orange border-4 border-black shadow-neo px-3 py-2 font-black text-xs rotate-3 z-20 hidden lg:flex items-center gap-1">
+          <div class="absolute top-1/2 -right-6 bg-neo-orange border-4 border-black shadow-neo px-3 py-2 font-black text-xs rotate-3 z-20 hidden lg:flex items-center gap-1 transition-all duration-300 group-hover/hero:scale-110 group-hover/hero:-right-10 group-hover/hero:rotate-6">
             <span class="material-symbols-outlined text-base font-bold">check_circle</span>
             5 Tasks Done
           </div>
@@ -925,5 +953,36 @@ for (let i = 0; i < 12; i++) {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform-style: preserve-3d;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 0.7;
+  }
+}
+
+.sparkle-anim {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+/* Illustration card wiggle on hover */
+.hero-illustration:hover .illustration-card {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-2deg); }
+  30% { transform: rotate(2deg); }
+  45% { transform: rotate(-1.5deg); }
+  60% { transform: rotate(1.5deg); }
+  75% { transform: rotate(-1deg); }
+  90% { transform: rotate(0.5deg); }
 }
 </style>
