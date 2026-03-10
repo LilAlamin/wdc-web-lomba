@@ -6,6 +6,7 @@ import ProfileView from "../components/ProfileView.vue";
 import AchievementsView from "../components/AchievementsView.vue";
 import AssignmentsView from "../components/AssignmentsView.vue";
 import AiAssistantView from "../components/AiAssistantView.vue";
+import FocusView from "../components/FocusView.vue";
 
 const router = useRouter();
 
@@ -30,9 +31,11 @@ const activeView = ref(
         ? "profile"
         : window.location.hash.includes("assignments")
           ? "assignments"
-          : window.location.hash.includes("ai")
-            ? "ai"
-            : "calendar",
+          : window.location.hash.includes("focus")
+            ? "focus"
+            : window.location.hash.includes("ai")
+              ? "ai"
+              : "calendar",
 );
 
 const toggleView = (view) => {
@@ -46,6 +49,8 @@ const toggleView = (view) => {
     window.location.hash = "achievements";
   } else if (view === "assignments") {
     window.location.hash = "assignments";
+  } else if (view === "focus") {
+    window.location.hash = "focus";
   } else if (view === "ai") {
     window.location.hash = "ai";
   } else {
@@ -62,9 +67,11 @@ const handleHashChange = () => {
         ? "profile"
         : window.location.hash.includes("assignments")
           ? "assignments"
-          : window.location.hash.includes("ai")
-            ? "ai"
-            : "calendar";
+          : window.location.hash.includes("focus")
+            ? "focus"
+            : window.location.hash.includes("ai")
+              ? "ai"
+              : "calendar";
 };
 
 onMounted(() => {
@@ -480,6 +487,17 @@ const filteredEvents = computed(() => {
               >Assignments</a
             >
             <a
+              @click.prevent="toggleView('focus')"
+              :class="[
+                'text-sm font-bold uppercase tracking-widest px-3 py-1 border-2 transition-all rounded cursor-pointer',
+                activeView === 'focus'
+                  ? 'bg-primary text-black border-black shadow-neo'
+                  : 'border-transparent hover:border-black hover:shadow-neo hover:bg-primary hover:text-black',
+              ]"
+              href="#focus"
+              >Focus</a
+            >
+            <a
               @click.prevent="toggleView('ai')"
               :class="[
                 'text-sm font-bold uppercase tracking-widest px-3 py-1 border-2 transition-all rounded cursor-pointer',
@@ -594,6 +612,19 @@ const filteredEvents = computed(() => {
           >
             <span class="material-symbols-outlined font-bold text-lg">assignment</span>
             Assignments
+          </a>
+          <a
+            @click.prevent="toggleView('focus')"
+            :class="[
+              'text-sm font-bold uppercase tracking-widest px-4 py-3 border-3 transition-all rounded cursor-pointer flex items-center gap-3',
+              activeView === 'focus'
+                ? 'bg-primary text-black border-black shadow-neo'
+                : 'border-gray-200 hover:border-black hover:shadow-neo hover:bg-primary hover:text-black',
+            ]"
+            href="#focus"
+          >
+            <span class="material-symbols-outlined font-bold text-lg">timer</span>
+            Focus
           </a>
           <a
             @click.prevent="toggleView('ai')"
@@ -948,6 +979,9 @@ const filteredEvents = computed(() => {
 
     <!-- Render Assignments View conditionally -->
     <AssignmentsView v-if="activeView === 'assignments'" @navigate="toggleView" />
+
+    <!-- Render Focus View conditionally -->
+    <FocusView v-if="activeView === 'focus'" />
 
     <!-- Render AI Assistant View conditionally -->
     <AiAssistantView v-else-if="activeView === 'ai'" />
