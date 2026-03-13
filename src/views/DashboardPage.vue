@@ -447,7 +447,7 @@ const filteredEvents = computed(() => {
               >
             </div>
             <h2
-              class="text-sm md:text-xl font-black uppercase tracking-wider border-b-2 border-black hidden sm:block"
+              class="text-xs sm:text-sm md:text-xl font-black uppercase tracking-wider border-b-2 border-black"
             >
               Buku Sakti Mahasiswa
             </h2>
@@ -666,30 +666,30 @@ const filteredEvents = computed(() => {
           <div class="flex items-center gap-6">
             <button
               @click="prevMonth"
-              class="size-12 rounded-full border-4 border-black bg-neo-blue shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 flex items-center justify-center transition-all"
+              class="size-10 md:size-12 rounded-full border-4 border-black bg-neo-blue shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 flex items-center justify-center transition-all"
             >
               <span class="material-symbols-outlined font-black text-black"
                 >arrow_back</span
               >
             </button>
-            <h1 class="text-5xl font-black uppercase tracking-tighter">
+            <h1 class="text-2xl md:text-5xl font-black uppercase tracking-tighter">
               {{ currentMonthName }} {{ currentYear }}
             </h1>
             <button
               @click="nextMonth"
-              class="size-12 rounded-full border-4 border-black bg-neo-pink shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 flex items-center justify-center transition-all"
+              class="size-10 md:size-12 rounded-full border-4 border-black bg-neo-pink shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 flex items-center justify-center transition-all"
             >
               <span class="material-symbols-outlined font-black text-black"
                 >arrow_forward</span
               >
             </button>
           </div>
-          <div class="flex gap-4">
+          <div class="flex flex-wrap gap-2 sm:gap-4">
             <div class="relative">
               <button
                 @click="showFilterPanel = !showFilterPanel"
                 :class="[
-                  'flex items-center justify-center gap-2 border-4 border-black rounded px-6 py-3 font-bold uppercase shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all',
+                  'flex items-center justify-center gap-2 border-4 border-black rounded px-4 md:px-6 py-2 md:py-3 font-bold uppercase text-sm shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all',
                   activeFilters.length < 7 || searchQuery
                     ? 'bg-neo-orange text-black'
                     : 'bg-white dark:bg-slate-800',
@@ -708,7 +708,7 @@ const filteredEvents = computed(() => {
               <!-- Filter Dropdown -->
               <div
                 v-if="showFilterPanel"
-                class="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-slate-900 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-50 flex flex-col"
+                class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:absolute sm:top-full sm:right-0 sm:left-auto sm:-translate-x-0 sm:-translate-y-0 sm:mt-2 w-[calc(100vw-2rem)] sm:w-72 bg-white dark:bg-slate-900 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-[60] flex flex-col"
               >
                 <!-- Filter Header -->
                 <div class="flex items-center justify-between border-b-4 border-black p-4 bg-neo-orange">
@@ -776,7 +776,7 @@ const filteredEvents = computed(() => {
             </div>
             <button
               @click="openCreateModal"
-              class="flex items-center justify-center gap-2 border-4 border-black rounded bg-primary text-black px-6 py-3 font-bold uppercase shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all"
+              class="flex items-center justify-center gap-2 border-4 border-black rounded bg-primary text-black px-4 md:px-6 py-2 md:py-3 font-bold uppercase text-sm shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all"
             >
               <span class="material-symbols-outlined font-bold">add</span>
               New Event
@@ -791,37 +791,13 @@ const filteredEvents = computed(() => {
           <div
             class="grid grid-cols-7 border-b-4 border-black bg-gray-100 dark:bg-slate-800"
           >
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Sun
-            </div>
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Mon
-            </div>
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Tue
-            </div>
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Wed
-            </div>
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Thu
-            </div>
-            <div
-              class="py-4 text-center font-black uppercase border-r-4 border-black"
-            >
-              Fri
-            </div>
-            <div class="py-4 text-center font-black uppercase">Sat</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Sun</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Mon</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Tue</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Wed</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Thu</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base border-r-2 md:border-r-4 border-black">Fri</div>
+            <div class="py-2 md:py-4 text-center font-black uppercase text-xs md:text-base">Sat</div>
           </div>
           <!-- Dates Grid -->
           <div
@@ -833,7 +809,7 @@ const filteredEvents = computed(() => {
               v-for="(day, index) in calendarDays"
               :key="index"
               :class="[
-                'border-b-4 border-black p-2 min-h-[120px] relative transition-colors',
+                'border-b-2 md:border-b-4 border-black p-1 md:p-2 min-h-[60px] md:min-h-[120px] relative transition-colors',
                 index % 7 !== 6 ? 'border-r-4' : '', // Add right borders except for last column
                 day.month !== 'current'
                   ? 'bg-gray-200 dark:bg-slate-700'
@@ -845,7 +821,7 @@ const filteredEvents = computed(() => {
               <!-- Date Number -->
               <span
                 v-if="day.isToday"
-                class="font-black text-2xl text-black bg-white border-2 border-black rounded-full size-10 flex items-center justify-center shadow-neo absolute -top-3 -left-3"
+                class="font-black text-lg md:text-2xl text-black bg-white border-2 border-black rounded-full size-7 md:size-10 flex items-center justify-center shadow-neo absolute -top-2 md:-top-3 -left-2 md:-left-3"
               >
                 {{ day.date }}
               </span>
@@ -853,8 +829,8 @@ const filteredEvents = computed(() => {
                 v-else
                 :class="[
                   day.month !== 'current'
-                    ? 'font-bold text-gray-500'
-                    : 'font-black text-xl',
+                    ? 'font-bold text-gray-500 text-xs md:text-base'
+                    : 'font-black text-sm md:text-xl',
                   day.isSpecial ? 'text-neo-pink' : '',
                 ]"
               >
@@ -870,7 +846,7 @@ const filteredEvents = computed(() => {
                   v-for="(event, idx) in day.events"
                   :key="idx"
                   @click="openEventDetail(event)"
-                  :class="`${event.color} border-2 border-black px-2 py-1 text-xs font-bold text-black truncate shadow-sm cursor-pointer hover:opacity-80 hover:-translate-y-[1px] transition-all`"
+                  :class="`${event.color} border md:border-2 border-black px-1 md:px-2 py-0.5 md:py-1 text-[10px] md:text-xs font-bold text-black truncate shadow-sm cursor-pointer hover:opacity-80 hover:-translate-y-[1px] transition-all`"
                 >
                   {{ event.title }}
                 </div>
@@ -1158,7 +1134,7 @@ const filteredEvents = computed(() => {
           <!-- Deadline Row: Date + Time -->
           <div class="flex flex-col gap-1">
             <label class="font-black uppercase text-xs text-gray-500 dark:text-gray-400">Deadline</label>
-            <div class="flex gap-2">
+            <div class="flex flex-col sm:flex-row gap-2">
               <input
                 v-model="newEvent.date"
                 type="date"
@@ -1167,12 +1143,12 @@ const filteredEvents = computed(() => {
               <input
                 v-model="newEvent.startTime"
                 type="time"
-                class="w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
+                class="w-full sm:w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
               />
               <input
                 v-model="newEvent.endTime"
                 type="time"
-                class="w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
+                class="w-full sm:w-24 border-2 border-black rounded py-2 px-2 font-bold text-sm text-black dark:text-white bg-white dark:bg-slate-800 focus:shadow-neo focus:outline-none transition-all"
               />
             </div>
           </div>

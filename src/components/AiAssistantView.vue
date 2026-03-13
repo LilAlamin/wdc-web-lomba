@@ -1,17 +1,17 @@
 <template>
-  <div class="flex-1 px-10 pb-10 max-w-[1600px] mx-auto w-full flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+  <div class="flex-1 px-4 md:px-10 pb-4 md:pb-10 max-w-[1600px] mx-auto w-full flex flex-col lg:flex-row gap-6 md:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
     
     <!-- Left Column: Chat Area -->
-    <div class="flex-1 flex flex-col gap-6 h-[calc(100vh-140px)] min-h-[600px]">
+    <div class="flex-1 flex flex-col gap-4 md:gap-6 h-[calc(100vh-120px)] md:h-[calc(100vh-140px)] min-h-[500px] md:min-h-[600px]">
       
       <!-- Chat Header -->
-      <div class="bg-white border-[6px] border-black rounded-[2rem] p-6 flex items-center justify-between shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+      <div class="bg-white border-4 md:border-[6px] border-black rounded-2xl md:rounded-[2rem] p-4 md:p-6 flex items-center justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
         <div class="flex items-center gap-4">
-          <div class="size-14 rounded-full border-4 border-black bg-cyan-300 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <span class="font-black text-2xl uppercase">L</span>
+          <div class="size-10 md:size-14 rounded-full border-4 border-black bg-cyan-300 flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <span class="font-black text-xl md:text-2xl uppercase">L</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="text-2xl font-black uppercase tracking-tight leading-none">Lumina</h2>
+            <h2 class="text-lg md:text-2xl font-black uppercase tracking-tight leading-none">Lumina</h2>
             <span class="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">AI Study Companion</span>
           </div>
         </div>
@@ -24,7 +24,7 @@
       <!-- Chat Messages Container -->
       <div 
         ref="chatContainer"
-        class="flex-1 bg-white border-[6px] border-black rounded-[2rem] p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-6 overflow-y-auto"
+        class="flex-1 bg-white border-4 md:border-[6px] border-black rounded-2xl md:rounded-[2rem] p-4 md:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-4 md:gap-6 overflow-y-auto"
       >
         <!-- Welcome Message -->
         <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full gap-4 text-center opacity-70">
@@ -111,11 +111,11 @@
     </div>
 
     <!-- Right Sidebar -->
-    <div class="w-full lg:w-96 flex flex-col gap-8">
+    <div class="w-full lg:w-80 xl:w-96 flex flex-col gap-6 md:gap-8">
       
       <!-- Quick Questions -->
-      <div class="bg-white border-[6px] border-black rounded-[2.5rem] p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-        <h3 class="text-2xl font-black uppercase border-b-[5px] border-black pb-4 mb-6 relative">
+      <div class="bg-white border-4 md:border-[6px] border-black rounded-2xl md:rounded-[2.5rem] p-4 md:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <h3 class="text-xl md:text-2xl font-black uppercase border-b-4 md:border-b-[5px] border-black pb-3 md:pb-4 mb-4 md:mb-6 relative">
           Quick Questions
           <span class="absolute top-0 right-0 material-symbols-outlined text-neo-pink font-black text-3xl animate-pulse">tips_and_updates</span>
         </h3>

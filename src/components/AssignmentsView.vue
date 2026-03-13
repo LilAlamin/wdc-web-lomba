@@ -139,12 +139,12 @@ const stats = computed(() => {
 </script>
 
 <template>
-  <main class="flex-1 flex flex-col lg:flex-row gap-8 px-10 pb-10 w-full max-w-[1600px] mx-auto">
+  <main class="flex-1 flex flex-col lg:flex-row gap-6 md:gap-8 px-4 md:px-10 pb-4 md:pb-10 w-full max-w-[1600px] mx-auto">
     <!-- Main Task Area -->
     <div class="flex-1 flex flex-col gap-6">
       
       <!-- Header Area -->
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-white dark:bg-slate-900 px-6 py-5 border-[5px] border-black shadow-neo rounded-full">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4 bg-white dark:bg-slate-900 px-4 md:px-6 py-4 md:py-5 border-4 md:border-[5px] border-black shadow-neo rounded-2xl md:rounded-full">
         <div class="flex items-center gap-4">
           <button 
             @click="$emit('navigate', 'calendar')"
@@ -152,7 +152,7 @@ const stats = computed(() => {
           >
             <span class="material-symbols-outlined font-black text-black">arrow_back</span>
           </button>
-          <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black dark:text-white">
+          <h1 class="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter text-black dark:text-white">
             All Assignments
           </h1>
         </div>
@@ -205,7 +205,7 @@ const stats = computed(() => {
           v-for="task in filteredTasks" 
           :key="task.id"
           :class="[
-            'flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 md:p-6 border-[5px] border-black rounded-[2rem] transition-all',
+            'flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4 p-4 md:p-6 border-4 md:border-[5px] border-black rounded-xl md:rounded-[2rem] transition-all',
             task.status === 'overdue' ? 'bg-neo-pink shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]' : 'bg-white dark:bg-slate-900 shadow-neo hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1'
           ]"
         >
@@ -288,7 +288,7 @@ const stats = computed(() => {
       </div>
 
       <!-- Progress Card -->
-      <div class="bg-white dark:bg-slate-900 p-8 border-[5px] border-black rounded-[2rem] shadow-neo flex flex-col gap-6">
+      <div class="bg-white dark:bg-slate-900 p-5 md:p-8 border-4 md:border-[5px] border-black rounded-2xl md:rounded-[2rem] shadow-neo flex flex-col gap-4 md:gap-6">
         <div class="flex items-center justify-between pb-4 border-b-4 border-black">
           <h2 class="font-black text-lg uppercase tracking-tight text-black dark:text-white">Progress</h2>
           <span class="material-symbols-outlined text-neo-orange font-black">trending_up</span>

@@ -4,6 +4,15 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+// Mobile menu
+const mobileMenuOpen = ref(false);
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+};
+
+// Flip card states for mobile (touch devices)
+const flippedCards = ref({});
+
 // Scroll animation
 const isVisible = ref({});
 const observeElements = () => {
@@ -158,43 +167,87 @@ for (let i = 0; i < 12; i++) {
   <div class="relative overflow-hidden">
     <!-- ============ NAVBAR ============ -->
     <nav
-      class="sticky top-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 bg-white border-b-4 border-black shadow-neo"
+      class="sticky top-0 z-50 flex flex-col bg-white border-b-4 border-black shadow-neo"
     >
-      <div class="flex items-center gap-3">
-        <div
-          class="flex size-10 items-center justify-center bg-primary border-4 border-black rounded shadow-neo"
-        >
-          <span class="material-symbols-outlined font-black text-black"
-            >auto_stories</span
+      <div class="flex items-center justify-between px-4 md:px-10 py-3 md:py-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="flex size-8 md:size-10 items-center justify-center bg-primary border-3 md:border-4 border-black rounded shadow-neo"
+          >
+            <span class="material-symbols-outlined font-black text-black text-sm md:text-base"
+              >auto_stories</span
+            >
+          </div>
+          <h1 class="text-base md:text-xl font-black uppercase tracking-wider">
+            Buku Sakti
+          </h1>
+        </div>
+        <div class="hidden md:flex items-center gap-6">
+          <a
+            href="#features"
+            class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+            >Fitur</a
+          >
+          <a
+            href="#how-it-works"
+            class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+            >Cara Kerja</a
+          >
+          <a
+            href="#cta"
+            class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+            >Mulai</a
           >
         </div>
-        <h1 class="text-lg md:text-xl font-black uppercase tracking-wider">
-          Buku Sakti
-        </h1>
+        <div class="flex items-center gap-2">
+          <button
+            @click="goToLogin"
+            class="hidden md:block px-6 py-2 bg-primary border-4 border-black font-black uppercase text-sm shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all cursor-pointer"
+          >
+            Login
+          </button>
+          <!-- Hamburger (mobile only) -->
+          <button
+            @click="toggleMobileMenu"
+            class="md:hidden flex items-center justify-center size-10 border-3 border-black bg-white shadow-neo hover:shadow-neo-hover transition-all cursor-pointer"
+          >
+            <span class="material-symbols-outlined font-black text-black">{{
+              mobileMenuOpen ? 'close' : 'menu'
+            }}</span>
+          </button>
+        </div>
       </div>
-      <div class="hidden md:flex items-center gap-6">
+
+      <!-- Mobile Menu Dropdown -->
+      <div
+        v-if="mobileMenuOpen"
+        class="md:hidden px-4 pb-4 border-t-2 border-black pt-3 flex flex-col gap-2"
+      >
         <a
           href="#features"
-          class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+          @click="mobileMenuOpen = false"
+          class="text-sm font-bold uppercase tracking-widest px-4 py-3 border-2 border-gray-200 rounded hover:bg-neo-pink hover:border-black transition-all"
           >Fitur</a
         >
         <a
           href="#how-it-works"
-          class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+          @click="mobileMenuOpen = false"
+          class="text-sm font-bold uppercase tracking-widest px-4 py-3 border-2 border-gray-200 rounded hover:bg-neo-pink hover:border-black transition-all"
           >Cara Kerja</a
         >
         <a
           href="#cta"
-          class="text-sm font-bold uppercase tracking-widest hover:text-neo-pink transition-colors"
+          @click="mobileMenuOpen = false"
+          class="text-sm font-bold uppercase tracking-widest px-4 py-3 border-2 border-gray-200 rounded hover:bg-neo-pink hover:border-black transition-all"
           >Mulai</a
         >
+        <button
+          @click="goToLogin"
+          class="w-full px-4 py-3 bg-primary border-3 border-black font-black uppercase text-sm shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all cursor-pointer mt-1"
+        >
+          Login
+        </button>
       </div>
-      <button
-        @click="goToLogin"
-        class="px-6 py-2 bg-primary border-4 border-black font-black uppercase text-sm shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all cursor-pointer"
-      >
-        Login
-      </button>
     </nav>
 
     <!-- ============ HERO SECTION ============ -->
@@ -456,36 +509,43 @@ for (let i = 0; i < 12; i++) {
               perspective: '1000px',
             }"
           >
-            <div class="flip-card group relative w-full" style="min-height: 320px;">
+            <div
+              class="flip-card relative w-full"
+              :class="{ 'group': true, 'is-flipped': flippedCards[idx] }"
+              style="min-height: 320px;"
+              @click="flippedCards[idx] = !flippedCards[idx]"
+            >
               <!-- FRONT FACE -->
               <div
-                class="flip-card-front absolute inset-0 p-8 border-4 border-black shadow-neo bg-white flex flex-col backface-hidden transition-transform duration-500 group-hover:[transform:rotateY(180deg)]"
+                class="flip-card-front absolute inset-0 p-6 md:p-8 border-4 border-black shadow-neo bg-white flex flex-col backface-hidden transition-transform duration-500 md:group-hover:[transform:rotateY(180deg)]"
+                :class="flippedCards[idx] ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]'"
               >
                 <!-- Icon -->
                 <div
                   :class="[
-                    'w-16 h-16 flex items-center justify-center border-4 border-black shadow-neo mb-6',
+                    'w-14 h-14 md:w-16 md:h-16 flex items-center justify-center border-4 border-black shadow-neo mb-4 md:mb-6',
                     feature.color,
                   ]"
                 >
-                  <span class="material-symbols-outlined text-3xl font-black text-black">{{
+                  <span class="material-symbols-outlined text-2xl md:text-3xl font-black text-black">{{ 
                     feature.icon
                   }}</span>
                 </div>
 
                 <!-- Content -->
                 <h3
-                  class="text-2xl font-black uppercase mb-3"
+                  class="text-xl md:text-2xl font-black uppercase mb-3"
                 >
                   {{ feature.title }}
                 </h3>
-                <p class="font-bold text-gray-600 leading-relaxed flex-1">
+                <p class="font-bold text-gray-600 leading-relaxed flex-1 text-sm md:text-base">
                   {{ feature.desc }}
                 </p>
 
                 <!-- Arrow -->
                 <div class="mt-4 flex items-center gap-2 text-sm font-black uppercase text-gray-400 group-hover:text-black transition-colors">
-                  <span>Hover untuk detail</span>
+                  <span class="hidden md:inline">Hover untuk detail</span>
+                  <span class="md:hidden">Tap untuk detail</span>
                   <span class="material-symbols-outlined text-lg font-bold animate-pulse">touch_app</span>
                 </div>
               </div>
@@ -493,38 +553,40 @@ for (let i = 0; i < 12; i++) {
               <!-- BACK FACE -->
               <div
                 :class="[
-                  'flip-card-back absolute inset-0 p-8 border-4 border-black shadow-neo flex flex-col backface-hidden [transform:rotateY(180deg)] transition-transform duration-500 group-hover:[transform:rotateY(0deg)]',
+                  'flip-card-back absolute inset-0 p-6 md:p-8 border-4 border-black shadow-neo flex flex-col backface-hidden transition-transform duration-500 md:group-hover:[transform:rotateY(0deg)]',
                   feature.color,
+                  flippedCards[idx] ? '[transform:rotateY(0deg)]' : '[transform:rotateY(180deg)]'
                 ]"
               >
                 <!-- Header -->
-                <div class="flex items-center gap-3 mb-5">
-                  <div class="w-12 h-12 flex items-center justify-center border-4 border-black bg-white shadow-neo">
-                    <span class="material-symbols-outlined text-2xl font-black text-black">{{
+                <div class="flex items-center gap-3 mb-4 md:mb-5">
+                  <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border-4 border-black bg-white shadow-neo">
+                    <span class="material-symbols-outlined text-xl md:text-2xl font-black text-black">{{
                       feature.icon
                     }}</span>
                   </div>
-                  <h3 class="text-xl font-black uppercase text-black">
+                  <h3 class="text-lg md:text-xl font-black uppercase text-black">
                     {{ feature.title }}
                   </h3>
                 </div>
 
                 <!-- Detail list -->
-                <div class="flex flex-col gap-2.5 flex-1">
+                <div class="flex flex-col gap-2 md:gap-2.5 flex-1">
                   <div
                     v-for="(detail, dIdx) in feature.details"
                     :key="dIdx"
                     class="flex items-start gap-2"
                   >
-                    <span class="material-symbols-outlined text-black font-bold text-lg flex-shrink-0 mt-0.5">check_circle</span>
-                    <span class="font-bold text-black text-sm leading-snug">{{ detail }}</span>
+                    <span class="material-symbols-outlined text-black font-bold text-base md:text-lg flex-shrink-0 mt-0.5">check_circle</span>
+                    <span class="font-bold text-black text-xs md:text-sm leading-snug">{{ detail }}</span>
                   </div>
                 </div>
 
                 <!-- Footer -->
                 <div class="mt-4 pt-3 border-t-2 border-black flex items-center gap-2 text-sm font-black uppercase text-black">
                   <span class="material-symbols-outlined text-lg font-bold">arrow_back</span>
-                  <span>Hover untuk kembali</span>
+                  <span class="hidden md:inline">Hover untuk kembali</span>
+                  <span class="md:hidden">Tap untuk kembali</span>
                 </div>
               </div>
             </div>

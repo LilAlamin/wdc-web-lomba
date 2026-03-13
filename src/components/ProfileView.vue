@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex-1 px-10 pb-10 max-w-[1600px] mx-auto w-full flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
+    class="flex-1 px-4 md:px-10 pb-4 md:pb-10 max-w-[1600px] mx-auto w-full flex flex-col lg:flex-row gap-6 md:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
   >
     <!-- Left Column (Main Info & Stats) -->
-    <div class="flex-1 flex flex-col gap-8">
+    <div class="flex-1 flex flex-col gap-6 md:gap-8">
       <!-- User Info Card -->
       <div
-        class="relative bg-white dark:bg-slate-900 border-[6px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-[2.5rem] p-8 overflow-hidden hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all group"
+        class="relative bg-white dark:bg-slate-900 border-4 md:border-[6px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-2xl md:rounded-[2.5rem] p-4 md:p-8 overflow-hidden hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all group"
       >
         <!-- Decorative shape -->
         <div
@@ -34,7 +34,7 @@
             <img v-else :src="profileImageUrl" class="w-full h-full object-cover" />
           </div>
           <div class="flex-1 flex flex-col gap-3">
-            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-tight">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-tight">
               {{ userName }}
             </h1>
             <div>
@@ -160,12 +160,12 @@
     </div>
 
     <!-- Right Sidebar -->
-    <div class="w-full lg:w-96 flex flex-col gap-8">
+    <div class="w-full lg:w-96 flex flex-col gap-6 md:gap-8">
       <!-- Study Streak -->
       <div
-        class="bg-gradient-to-br from-[#f06144] to-[#f3a446] border-[6px] border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-[3.5rem] p-10 flex flex-col items-start relative overflow-hidden group cursor-pointer hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 text-white"
+        class="bg-gradient-to-br from-[#f06144] to-[#f3a446] border-4 md:border-[6px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-2xl md:rounded-[3.5rem] p-6 md:p-10 flex flex-col items-start relative overflow-hidden group cursor-pointer hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 text-white"
       >
-        <h3 class="font-black uppercase tracking-wider text-4xl mb-6 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
+        <h3 class="font-black uppercase tracking-wider text-2xl md:text-4xl mb-4 md:mb-6 drop-shadow-[2px_2px_0px_rgba(0,0,0,0.3)]">
           Study Streak
         </h3>
         <div class="flex items-center gap-6 pl-4">
@@ -175,8 +175,8 @@
             >local_fire_department</span
           >
           <div class="flex flex-col">
-            <span class="text-[5.5rem] font-black leading-none drop-shadow-[3px_3px_0px_rgba(0,0,0,0.3)] mb-2">12</span>
-            <span class="font-black uppercase text-2xl tracking-widest drop-shadow-[1px_1px_0px_rgba(0,0,0,0.3)]"
+            <span class="text-[4rem] md:text-[5.5rem] font-black leading-none drop-shadow-[3px_3px_0px_rgba(0,0,0,0.3)] mb-2">12</span>
+            <span class="font-black uppercase text-lg md:text-2xl tracking-widest drop-shadow-[1px_1px_0px_rgba(0,0,0,0.3)]"
               >Days Strong</span
             >
           </div>

@@ -1,14 +1,14 @@
 <template>
-  <div class="flex-1 px-10 pb-10 max-w-[1600px] mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+  <div class="flex-1 px-4 md:px-10 pb-4 md:pb-10 max-w-[1600px] mx-auto w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
 
     <!-- Header -->
-    <div class="flex flex-wrap items-center justify-between gap-6 mb-10">
+    <div class="flex flex-wrap items-center justify-between gap-4 md:gap-6 mb-6 md:mb-10">
       <div class="flex items-center gap-4">
         <button
           @click="$emit('back')"
-          class="size-14 border-4 border-black bg-white rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all flex items-center justify-center active:bg-gray-200"
+          class="size-10 md:size-14 border-4 border-black bg-white rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all flex items-center justify-center active:bg-gray-200"
         >
-          <span class="material-symbols-outlined font-black text-2xl">arrow_back</span>
+          <span class="material-symbols-outlined font-black text-xl md:text-2xl">arrow_back</span>
         </button>
         <div>
           <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter">Achievements</h1>
@@ -17,7 +17,7 @@
       </div>
 
       <!-- Progress Bar -->
-      <div class="flex items-center gap-4 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-2xl px-6 py-4 min-w-[280px]">
+      <div class="flex items-center gap-3 md:gap-4 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-2xl px-4 md:px-6 py-3 md:py-4 w-full sm:w-auto sm:min-w-[280px]">
         <span class="material-symbols-outlined font-black text-3xl text-primary">military_tech</span>
         <div class="flex-1">
           <div class="flex justify-between items-center mb-2">
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Filter Tabs -->
-    <div class="flex gap-3 mb-8 flex-wrap">
+    <div class="flex gap-2 md:gap-3 mb-6 md:mb-8 flex-wrap">
       <button
         v-for="tab in filterTabs"
         :key="tab.value"

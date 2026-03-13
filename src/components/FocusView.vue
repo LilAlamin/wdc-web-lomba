@@ -485,7 +485,7 @@ const clearHistory = () => {
           <button
             @click="if (!timerRunning) { timerMode = 'focus'; timerSeconds = focusDurationSec; }"
             :class="[
-              'px-5 py-2 font-black uppercase text-sm tracking-wider transition-all cursor-pointer border-r-4 border-black',
+              'px-3 md:px-5 py-2 font-black uppercase text-xs md:text-sm tracking-wider transition-all cursor-pointer border-r-4 border-black',
               timerMode === 'focus' ? 'bg-neo-pink text-black' : 'bg-white dark:bg-slate-900 hover:bg-gray-100',
             ]"
           >
@@ -494,7 +494,7 @@ const clearHistory = () => {
           <button
             @click="if (!timerRunning) { timerMode = 'shortBreak'; timerSeconds = shortBreakSec; }"
             :class="[
-              'px-5 py-2 font-black uppercase text-sm tracking-wider transition-all cursor-pointer border-r-4 border-black',
+              'px-3 md:px-5 py-2 font-black uppercase text-xs md:text-sm tracking-wider transition-all cursor-pointer border-r-4 border-black',
               timerMode === 'shortBreak' ? 'bg-neo-mint text-black' : 'bg-white dark:bg-slate-900 hover:bg-gray-100',
             ]"
           >
@@ -503,7 +503,7 @@ const clearHistory = () => {
           <button
             @click="if (!timerRunning) { timerMode = 'longBreak'; timerSeconds = longBreakSec; }"
             :class="[
-              'px-5 py-2 font-black uppercase text-sm tracking-wider transition-all cursor-pointer',
+              'px-3 md:px-5 py-2 font-black uppercase text-xs md:text-sm tracking-wider transition-all cursor-pointer',
               timerMode === 'longBreak' ? 'bg-neo-blue text-black' : 'bg-white dark:bg-slate-900 hover:bg-gray-100',
             ]"
           >
@@ -574,12 +574,12 @@ const clearHistory = () => {
         </div>
 
         <!-- Control Buttons -->
-        <div class="flex items-center gap-4 md:gap-6">
+        <div class="flex flex-wrap items-center justify-center gap-3 md:gap-6">
           <button
             @click="startTimer"
             :disabled="timerRunning"
             :class="[
-              'px-8 md:px-10 py-3 border-4 border-black font-black uppercase text-lg tracking-wide transition-all',
+              'px-5 md:px-10 py-2 md:py-3 border-4 border-black font-black uppercase text-base md:text-lg tracking-wide transition-all',
               timerRunning
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none'
                 : 'bg-neo-mint text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] cursor-pointer',
@@ -591,7 +591,7 @@ const clearHistory = () => {
             @click="pauseTimer"
             :disabled="!timerRunning"
             :class="[
-              'px-8 md:px-10 py-3 border-4 border-black font-black uppercase text-lg tracking-wide transition-all',
+              'px-5 md:px-10 py-2 md:py-3 border-4 border-black font-black uppercase text-base md:text-lg tracking-wide transition-all',
               !timerRunning
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none'
                 : 'bg-primary text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] cursor-pointer',
@@ -601,13 +601,13 @@ const clearHistory = () => {
           </button>
           <button
             @click="resetTimer"
-            class="px-8 md:px-10 py-3 border-4 border-black bg-neo-orange text-black font-black uppercase text-lg tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
+            class="px-5 md:px-10 py-2 md:py-3 border-4 border-black bg-neo-orange text-black font-black uppercase text-base md:text-lg tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
           >
             Reset
           </button>
           <button
             @click="skipToNext"
-            class="px-4 py-3 border-4 border-black bg-white dark:bg-slate-800 text-black dark:text-white font-black uppercase text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
+            class="px-3 md:px-4 py-2 md:py-3 border-4 border-black bg-white dark:bg-slate-800 text-black dark:text-white font-black uppercase text-base md:text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] transition-all cursor-pointer"
             title="Skip to next"
           >
             <span class="material-symbols-outlined font-bold">skip_next</span>

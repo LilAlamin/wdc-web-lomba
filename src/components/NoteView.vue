@@ -218,14 +218,14 @@ const orderedListActive = ref(false);
 
 <template>
   <div
-    class="flex-1 flex flex-col lg:flex-row border-4 border-black mx-10 mb-10 bg-white dark:bg-slate-900 shadow-neo min-h-[700px]"
+    class="flex-1 flex flex-col lg:flex-row border-4 border-black mx-4 md:mx-10 mb-4 md:mb-10 bg-white dark:bg-slate-900 shadow-neo min-h-[500px] lg:min-h-[700px]"
   >
     <!-- Left Sidebar -->
     <div
       class="w-full lg:w-80 border-b-4 lg:border-b-0 lg:border-r-4 border-black flex flex-col bg-background-light dark:bg-slate-800"
     >
       <!-- Workspace Header -->
-      <div class="p-6 border-b-4 border-black">
+      <div class="p-4 md:p-6 border-b-4 border-black">
         <div
           class="flex items-center gap-4 bg-neo-pink border-4 border-black p-3 shadow-neo cursor-pointer hover:-translate-y-1 hover:-translate-x-1 transition-transform"
         >
@@ -250,7 +250,7 @@ const orderedListActive = ref(false);
       </div>
 
       <!-- Subjects List -->
-      <div class="p-6 flex-1 flex flex-col gap-4 overflow-y-auto">
+      <div class="p-4 md:p-6 flex-1 flex flex-col gap-3 md:gap-4 overflow-y-auto">
         <h3 class="font-black uppercase tracking-widest text-sm mb-2">
           Subjects
         </h3>
@@ -290,7 +290,7 @@ const orderedListActive = ref(false);
       </div>
 
       <!-- New Folder Button -->
-      <div class="p-6 pt-0 mt-auto">
+      <div class="p-4 md:p-6 pt-0 mt-auto">
         <button
           @click="openAddFolderModal"
           class="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border-4 border-black p-3 font-black uppercase text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-neo transition-all"
@@ -310,7 +310,7 @@ const orderedListActive = ref(false);
     >
       <!-- Header / Tabs Area -->
       <div
-        class="px-8 pt-8 pb-0 border-b-4 border-black bg-white dark:bg-slate-900 overflow-x-auto"
+        class="px-4 md:px-8 pt-4 md:pt-8 pb-0 border-b-4 border-black bg-white dark:bg-slate-900 overflow-x-auto"
       >
         <div class="flex items-end gap-2 h-14">
           <template v-for="note in activeSubject.notes" :key="note.id">
@@ -351,9 +351,9 @@ const orderedListActive = ref(false);
 
       <!-- Toolbar -->
       <div
-        class="flex items-center gap-4 p-4 border-b-4 border-black bg-[#ffdeb3] dark:bg-orange-900 overflow-x-auto"
+        class="flex items-center gap-2 md:gap-4 p-3 md:p-4 border-b-4 border-black bg-[#ffdeb3] dark:bg-orange-900 overflow-x-auto"
       >
-        <div class="flex items-center gap-3 border-r-4 border-black pr-4">
+        <div class="flex items-center gap-2 md:gap-3 border-r-4 border-black pr-3 md:pr-4">
           <button
             @click="boldActive = !boldActive"
             :class="[
@@ -421,7 +421,7 @@ const orderedListActive = ref(false);
       </div>
 
       <!-- Note Editor Area -->
-      <div class="flex-1 flex flex-col p-8 overflow-y-auto w-full">
+      <div class="flex-1 flex flex-col p-4 md:p-8 overflow-y-auto w-full">
         <textarea
           v-if="activeNote"
           v-model="activeNote.content"
@@ -443,7 +443,7 @@ const orderedListActive = ref(false);
       </div>
 
       <!-- Floating Action Button -->
-      <div class="absolute bottom-8 right-8">
+      <div class="absolute bottom-4 right-4 md:bottom-8 md:right-8">
         <button
           @click="addNewNote"
           class="w-16 h-16 bg-[#00ff00] border-4 border-black shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all flex items-center justify-center rounded-xl"
