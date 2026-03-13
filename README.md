@@ -1,12 +1,13 @@
-Nama Website : Buku Sakti Mahasiswa
-Nama Tim: Jalan Kutai Utara
-Dengan Backend: TIDAK
-Daftar Fitur Utama: 
-1. Dashboard & Kalender Akademik: Memantau jadwal, deadline, dan event personal dengan fitur filter/pencarian.
-2. Manajemen Tugas & Penugasan: Pelacakan tugas terstruktur berdasarkan prioritas dan status, dilengkapi dengan statistik progress belajar.
-3. Mode Fokus (Pomodoro Timer): Timer produktivitas antikrastinasi dengan manajemen task, notifikasi audio, dan pencatatan riwayat sesi.
-4. Lumina AI Assistant: Asisten virtual cerdas bawaan berbasis AI untuk tanya jawab materi akademik dan memberikan study hacks.
-5. Catatan Pintar (Notes): Ruang penyimpanan catatan digital terintegrasi untuk materi kuliah dan riset.
+**Nama Website :** Buku Sakti Mahasiswa  
+**Nama Tim :** **Jalan Kutai Utara**  
+**Dengan Backend :** TIDAK  
+
+**Daftar Fitur Utama :** 
+1. **Dashboard & Kalender Akademik:** Memantau jadwal, deadline, dan event personal dengan fitur filter/pencarian.
+2. **Manajemen Tugas & Penugasan:** Pelacakan tugas terstruktur berdasarkan prioritas dan status, dilengkapi dengan statistik progress belajar.
+3. **Mode Fokus (Pomodoro Timer):** Timer produktivitas antikrastinasi dengan manajemen task, notifikasi audio, dan pencatatan riwayat sesi.
+4. **Lumina AI Assistant:** Asisten virtual cerdas bawaan berbasis AI untuk tanya jawab materi akademik dan memberikan study hacks.
+5. **Catatan Pintar (Notes):** Ruang penyimpanan catatan digital terintegrasi untuk materi kuliah dan riset.
 
 ---
 
