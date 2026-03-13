@@ -1,10 +1,20 @@
-# Buku Sakti Mahasiswa
+Nama Website : Buku Sakti Mahasiswa
+Nama Tim: Jalan Kutai Utara
+Dengan Backend: TIDAK
+Daftar Fitur Utama: 
+1. Dashboard & Kalender Akademik: Memantau jadwal, deadline, dan event personal dengan fitur filter/pencarian.
+2. Manajemen Tugas & Penugasan: Pelacakan tugas terstruktur berdasarkan prioritas dan status, dilengkapi dengan statistik progress belajar.
+3. Mode Fokus (Pomodoro Timer): Timer produktivitas antikrastinasi dengan manajemen task, notifikasi audio, dan pencatatan riwayat sesi.
+4. Lumina AI Assistant: Asisten virtual cerdas bawaan berbasis AI untuk tanya jawab materi akademik dan memberikan study hacks.
+5. Catatan Pintar (Notes): Ruang penyimpanan catatan digital terintegrasi untuk materi kuliah dan riset.
 
-**Tim:** Jalan Kutai Utara
+---
+
+# 📚 Buku Sakti Mahasiswa
 
 Buku Sakti Mahasiswa adalah aplikasi produktivitas komprehensif yang dirancang khusus untuk mempermudah dan mengorganisasi kehidupan akademik mahasiswa. Aplikasi ini menggabungkan berbagai fitur penting seperti kalender akademik, manajemen tugas, manajemen waktu (Pomodoro), pencatatan, dan asisten AI dalam satu platform yang modern, dinamis, dan bergaya desain *Neobrutalism*.
 
-## 🌟 Fitur Utama
+## 🌟 Fitur Utama (Penjelasan Detail)
 
 ### 1. Dashboard & Kalender Akademik
 Akses mudah untuk memantau semua aktivitas akademik dan non-akademik dalam satu halaman jadwal bulanan.
